@@ -60,7 +60,6 @@ for packet in packets_table:
             write_to_file("output/discarded_by_router_1.txt", new_packet)
             continue
     
-    print("PORT: ", send_port)
     # 11. Either
     # (a) send the new packet to the appropriate port (and append it to sent_by_router_1.txt),
     # (b) append the payload to out_router_1.txt without forwarding because this router is the last hop, or

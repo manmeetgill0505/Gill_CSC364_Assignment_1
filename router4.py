@@ -4,7 +4,6 @@ def processing_thread(connection, ip, port, forwarding_table_with_range, default
     # 1. Connect to the appropriate sending ports (based on the network topology diagram).
     # 2. Continuously process incoming packets
     while True:
-        print("In router 4")
         # 3. Receive the incoming packet, process it, and store its list representation
         packet = receive_packet(connection, "output/received_by_router_4.txt", max_buffer_size)
 
@@ -23,9 +22,6 @@ def processing_thread(connection, ip, port, forwarding_table_with_range, default
         new_packet_list = [sourceIP, destinationIP, payload, str(new_ttl)]
         new_packet = ",".join(new_packet_list)
 
-        print("new ttl and old ttl", new_ttl, "   ", int(ttl))
-        print("DEST:", destinationIP)
-
         # 7. Convert the destination IP into an integer for comparison purposes.
         destinationIP_bin = ip_to_bin(destinationIP)
         destinationIP_int = int(destinationIP_bin, 2)
@@ -43,8 +39,6 @@ def processing_thread(connection, ip, port, forwarding_table_with_range, default
         if (send_port == ""):
             send_port = default_gateway_port.strip()
 
-        print("PORT: ", send_port)
-        
         if (new_ttl == 0 and send_port != '127.0.0.1'):
             print("DISCARD:", new_packet)
             write_to_file("output/discarded_by_router_4.txt", new_packet)
